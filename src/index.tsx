@@ -1,7 +1,7 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { createServer } from "miragejs";
-import { App } from "./App";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createServer } from 'miragejs';
+import { App } from './App';
 
 createServer({
   routes() {
@@ -29,7 +29,7 @@ createServer({
           amount: 654.47,
           category: 'Stock earnings',
           date: new Date(),
-        }
+        },
       ];
     });
   },
@@ -39,5 +39,5 @@ ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root'),
 );

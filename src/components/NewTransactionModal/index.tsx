@@ -1,5 +1,5 @@
 // import { Container } from "./styles";
-import Modal from "react-modal";
+import Modal from 'react-modal';
 
 interface NewTransactionModalProps {
   isOpen: boolean;
@@ -15,10 +15,7 @@ export function NewTransactionModal({
   }
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={handleCloseNewTranscationModal}
-    >
+    <Modal isOpen={isOpen} onRequestClose={handleCloseNewTranscationModal}>
       <h2>Register new transaction</h2>
     </Modal>
   );
