@@ -6,7 +6,7 @@ interface Transcations {
   id: number;
   title: string;
   type: 'deposit' | 'withdraw';
-  value: number;
+  amount: number;
   createdAt: Date;
   category: string;
 }
@@ -35,9 +35,22 @@ export function TransactionsTable() {
           {transcations.map(transcation => (
             <tr key={transcation.id}>
               <td>{transcation.title}</td>
-              <td className={transcation.type}>{transcation.value}</td>
+              <td className={transcation.type}>
+                {new Intl.NumberFormat('en-US', {
+                  style: 'currency',
+                  currency: 'USD',
+                }).format(
+                  transcation.type === 'deposit'
+                    ? transcation.amount
+                    : transcation.amount * -1,
+                )}
+              </td>
               <td>{transcation.category}</td>
-              <td>{transcation.createdAt}</td>
+              <td>
+                {new Intl.DateTimeFormat('en-US').format(
+                  new Date(transcation.createdAt),
+                )}
+              </td>
             </tr>
           ))}
         </tbody>
