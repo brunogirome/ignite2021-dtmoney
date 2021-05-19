@@ -15,6 +15,7 @@ createServer({
           amount: 125.99,
           category: 'Furniture',
           date: new Date(),
+          type: 'withdraw',
         },
         {
           id: 2,
@@ -22,6 +23,7 @@ createServer({
           amount: 101.54,
           category: 'Taxes',
           date: new Date(),
+          type: 'withdraw',
         },
         {
           id: 3,
@@ -29,6 +31,7 @@ createServer({
           amount: 654.47,
           category: 'Stock earnings',
           date: new Date(),
+          type: 'deposit',
         },
       ];
     });
