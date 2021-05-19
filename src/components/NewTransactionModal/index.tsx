@@ -47,6 +47,7 @@ export function NewTransactionModal({
             type="button"
             onClick={() => setType('deposit')}
             isActive={type === 'deposit'}
+            activeColor="green"
           >
             <img src={imcomeImg} alt="Income" />
             <span>Income</span>
@@ -55,6 +56,7 @@ export function NewTransactionModal({
             type="button"
             onClick={() => setType('withdraw')}
             isActive={type === 'withdraw'}
+            activeColor="red"
           >
             <img src={outcomeImg} alt="Outcome" />
             <span>Outcome</span>
