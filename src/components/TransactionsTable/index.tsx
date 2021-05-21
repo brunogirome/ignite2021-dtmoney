@@ -3,7 +3,7 @@ import { Container } from './styles';
 import { TransactionsContext } from '../../TransactionsContext';
 
 export function TransactionsTable() {
-  const { transcations } = useContext(TransactionsContext);
+  const { transactions } = useContext(TransactionsContext);
 
   return (
     <Container>
@@ -17,23 +17,23 @@ export function TransactionsTable() {
           </tr>
         </thead>
         <tbody>
-          {transcations.map(transcation => (
-            <tr key={transcation.id}>
-              <td>{transcation.title}</td>
-              <td className={transcation.type}>
+          {transactions.map(transaction => (
+            <tr key={transaction.id}>
+              <td>{transaction.title}</td>
+              <td className={transaction.type}>
                 {new Intl.NumberFormat('en-US', {
                   style: 'currency',
                   currency: 'USD',
                 }).format(
-                  transcation.type === 'deposit'
-                    ? transcation.amount
-                    : transcation.amount * -1,
+                  transaction.type === 'deposit'
+                    ? transaction.amount
+                    : transaction.amount * -1,
                 )}
               </td>
-              <td>{transcation.category}</td>
+              <td>{transaction.category}</td>
               <td>
                 {new Intl.DateTimeFormat('en-US').format(
-                  new Date(transcation.createdAt),
+                  new Date(transaction.createdAt),
                 )}
               </td>
             </tr>

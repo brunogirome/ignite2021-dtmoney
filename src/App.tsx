@@ -13,13 +13,13 @@ export function App() {
   const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] =
     useState(false);
 
-  function handleOpenNewTranscationModal() {
+  function handleOpenNewTransactionModal() {
     setIsNewTransactionModalOpen(true);
   }
 
   return (
     <TransactionsProvider>
-      <Header handleOpenNewTranscationModal={handleOpenNewTranscationModal} />
+      <Header handleOpenNewTransactionModal={handleOpenNewTransactionModal} />
       <Dashboard />
       <NewTransactionModal
         isOpen={isNewTransactionModalOpen}

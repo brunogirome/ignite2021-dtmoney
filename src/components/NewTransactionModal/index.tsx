@@ -24,31 +24,37 @@ export function NewTransactionModal({
   const [type, setType] = useState<'deposit' | 'withdraw'>('deposit');
   const [category, setCategory] = useState('');
 
-  function handleCreatenewTransaction(event: FormEvent) {
+  async function handleCreatenewTransaction(event: FormEvent) {
     event.preventDefault();
 
-    createTransaction({
+    await createTransaction({
       title,
       amount,
       type,
       category,
     });
+
+    setTitle('');
+    setAmount(0);
+    setCategory('');
+    setType('deposit');
+    handleCloseNewTransactionModal();
   }
 
-  function handleCloseNewTranscationModal() {
+  function handleCloseNewTransactionModal() {
     setIsNewTransactionModalOpen(false);
   }
 
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={handleCloseNewTranscationModal}
+      onRequestClose={handleCloseNewTransactionModal}
       overlayClassName="react-modal-overlay"
       className="react-modal-content"
     >
       <button
         type="button"
-        onClick={handleCloseNewTranscationModal}
+        onClick={handleCloseNewTransactionModal}
         className="react-modal-close"
       >
         <img src={closeImg} alt="Close modal" />

@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
 import { api } from './services/api';
 
-interface Transcation {
+interface Transaction {
   id: number;
   title: string;
   type: 'deposit' | 'withdraw';
@@ -14,11 +14,11 @@ interface TransactionsProviderProps {
   children: ReactNode;
 }
 
-type TransactionInput = Omit<Transcation, 'id' | 'createdAt'>;
+type TransactionInput = Omit<Transaction, 'id' | 'createdAt'>;
 
 interface TransactionsContextData {
-  transcations: Transcation[];
-  createTransaction: (transcations: TransactionInput) => void;
+  transactions: Transaction[];
+  createTransaction: (transactions: TransactionInput) => Promise<void>;
 }
 
 export const TransactionsContext = createContext<TransactionsContextData>(
@@ -26,7 +26,7 @@ export const TransactionsContext = createContext<TransactionsContextData>(
 );
 
 export function TransactionsProvider({ children }: TransactionsProviderProps) {
-  const [transcations, setTransactions] = useState<Transcation[]>([]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   useEffect(() => {
     api
@@ -34,12 +34,18 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
       .then(response => setTransactions(response.data.transactions));
   }, []);
 
-  function createTransaction(transcation: TransactionInput) {
-    api.post('/transactions', transcation);
+  async function createTransaction(transactionInput: TransactionInput) {
+    const response = await api.post('/transactions', {
+      ...transactionInput,
+      createdAt: new Date(),
+    });
+    const { transaction } = response.data;
+
+    setTransactions([...transactions, transaction]);
   }
 
   return (
-    <TransactionsContext.Provider value={{ transcations, createTransaction }}>
+    <TransactionsContext.Provider value={{ transactions, createTransaction }}>
       {children}
     </TransactionsContext.Provider>
   );
